@@ -1,4 +1,12 @@
 .sidebar {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    padding: 10px;
 }
+
+.sidebar a:last-child {
+    margin-top: auto;
+}
+
+

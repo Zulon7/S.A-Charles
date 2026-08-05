@@ -8,11 +8,11 @@
     <title>Gerenciador de S.A</title>
 </head>
 <body>
-    <aside class = 'sidebar'>
+    <aside class = "sidebar">
         <a href="">Grupos</a>
         <a href="">Projetos</a>
         <a href="">Feed</a>
-        <a href="" style = "align-self:last baseline;">Conta</a>
+        <a href="">Conta</a>
     </aside>
 
     <script src="assets/script.js"></script>
