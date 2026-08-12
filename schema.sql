@@ -66,7 +66,9 @@ CREATE TABLE `users` (
   `nome` text NOT NULL,
   `email` text NOT NULL,
   `senha` text NOT NULL,
-  `data_criado` date NOT NULL DEFAULT current_timestamp()
+  `data_criado` date NOT NULL DEFAULT current_timestamp(),
+  `ativo` BIT NOT NULL DEFAULT 1,
+  `nivel` BIT NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
