@@ -7,7 +7,7 @@
 
     $nome = $_POST["nome"];
     $email = $_POST["email"];
-    $senha = $_POST["senha"];
+    $senha = password_hash($_POST["senha"]);
 
     $sql = "
     INSERT INTO users (id, nome, email, senha, data_criado)

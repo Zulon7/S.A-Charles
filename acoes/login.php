@@ -16,17 +16,18 @@
   $senha = mysql_real_escape_string($_POST["senha"]);
 
   // Validação do usuário/senha digitados
-  $sql = "SELECT `id`, `nome`, `nivel`, `senha` FROM `users` WHERE (`nome` = "".$usuario ."") AND (`senha` = "". $senha ."") AND (`ativo` = 1) LIMIT 1";
-  $query = mysql_query($sql);
-  if ((mysql_num_rows($query) != 1) || session_status == PHP_SESSION_NONE || PHP_SESSION_DISABLED)  {
+  $sql = "SELECT `id`, `nome`, `nivel`, `senha` FROM `users` WHERE (`nome` = ".$usuario .")  AND (`ativo` = 1) LIMIT 1";
+  $resultado = mysql_query($sql);
+  $fileira =  mysql_fetch_assoc($query);
+
+  if (password_verify($senha ,$fileira['senha'])  || session_status == PHP_SESSION_NONE || PHP_SESSION_DISABLED)  {
       // Mensagem de erro quando os dados são inválidos e/ou o usuário não foi encontrado
       echo "Login inválido!"; exit;
   } else {
-      // Salva os dados encontados na variável $resultado
-      $resultado = mysql_fetch_assoc($query);
+      // Salva os dados encontados na variável $fileira
       session_start();
-      $_SESSION['id'] = $resultado['id'];
-      $_SESSION['senha'] = $resultado['senha'];
+      $_SESSION['id'] = $fileira['id'];
+      $_SESSION['senha'] = $fileira['senha'];
   }
 
   $conexao -> close();
