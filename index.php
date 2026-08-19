@@ -1,6 +1,6 @@
 <?php 
-    start_session();
-
+    session_start();
+    
     //if (isset($_SESSION['id'])) {
         //header('feed.php');
     //}
@@ -16,7 +16,9 @@
     <title>Gerenciador de S.A</title>
 </head>
 <body>
-  <?php  include('sidebar.php') ?>
+  <?php header('Location: login.php'); exit;?>
+
+  <?php  //include('sidebar.php') ?>
   
 </body>
 </html>
