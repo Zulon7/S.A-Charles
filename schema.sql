@@ -23,13 +23,20 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `user-participa`;
+DROP TABLE IF EXISTS `user-modera`;
+DROP TABLE IF EXISTS `grupos`;
+
+
 --
 -- Estrutura para tabela `grupos`
 --
 
 CREATE TABLE `grupos` (
   `id` int(11) NOT NULL,
-  `nome` text NOT NULL,
+  `nome` varchar(150) NOT NULL,
   `data_criado` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -63,12 +70,12 @@ CREATE TABLE `user-participa` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `nome` text NOT NULL,
-  `email` text NOT NULL,
-  `senha` text NOT NULL,
+  `nome` varchar(150) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `senha` varchar(150) NOT NULL,
   `data_criado` date NOT NULL DEFAULT current_timestamp(),
   `ativo` BIT NOT NULL DEFAULT 1,
-  `nivel` BIT NOT NULL DEFAULT 0
+  `nivel` ENUM('aluno', 'professor') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

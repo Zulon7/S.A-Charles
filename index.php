@@ -1,3 +1,11 @@
+<?php 
+    start_session();
+
+    //if (isset($_SESSION['id'])) {
+        //header('feed.php');
+    //}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,13 +16,7 @@
     <title>Gerenciador de S.A</title>
 </head>
 <body>
-    <aside class = "sidebar">
-        <a href="">Grupos</a>
-        <a href="">Projetos</a>
-        <a href="">Feed</a>
-        <a href="">Conta</a>
-    </aside>
-
-    <script src="assets/script.js"></script>
+  <?php  include('sidebar.php') ?>
+  
 </body>
 </html>
