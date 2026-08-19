@@ -10,3 +10,23 @@
 }
 
 
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: auto;
+    gap: 10px;
+}
+.login-form .field {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-conteudo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+
