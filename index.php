@@ -1,17 +1,7 @@
-<?php 
-    session_start();
-    
-    //if (isset($_SESSION['id'])) {
-        //header('feed.php');
-    //}
-    include('header');
-?>
+<?php include('header.php'); ?>
 
+<?php header('Location: login.php'); exit;?>
 
-<body>
-  <?php header('Location: login.php'); exit;?>
-
-  <?php  //include('sidebar.php') ?>
+<?php  //include('sidebar.php') ?>
   
-</body>
-</html>
+<?php include("footer.php")?>

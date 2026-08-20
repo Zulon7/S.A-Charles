@@ -6,4 +6,7 @@
     <link rel="stylesheet" href="recursos/style.css">
    
     <title>Gerenciador de S.A</title>
+
+    <?php session_start(); ?>
 </head>
+<body>
