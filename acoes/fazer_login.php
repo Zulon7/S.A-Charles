@@ -6,11 +6,7 @@
     }
 
 
-    $conexao = new mysqli("127.0.0.1", "root", "", "samedia");
-
-    if ($conexao->connect_errno) {
-        die("Erro: " . $conexao->connect_error);
-    }
+    require("db_con_init.php");
 
     $usuario = $conexao -> real_escape_string($_POST["usuario"]);
     $senha = $conexao -> real_escape_string($_POST["senha"]);

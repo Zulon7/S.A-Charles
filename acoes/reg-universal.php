@@ -1,10 +1,7 @@
 <?php
     //Ação de registro para qualquer tabela relacional n para n
-    $conexao = new mysqli("127.0.0.1", "root", "", "samedia");
-
-    if ($conexao->connect_errno) {
-        die("Erro: " . $conexao->connect_error);
-    }
+    
+    include("db_con_init.php"); 
 
     $nome_tabela = $_POST["nome_tabela"];
     $nome_coluna1 = $_POST["nome_coluna1"];
