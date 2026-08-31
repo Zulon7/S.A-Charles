@@ -33,7 +33,7 @@
 
     }
 
-    if (($fileira['email'] != $email) and ($fileira['nome'] != $nome)){
+    if (($fileira['email'] != $email) and ($fileira['nome'] != $nome) and filter_var($email, FILTER_VALIDATE_EMAIL)){
         $sql = "
         INSERT INTO users (id, nome, email, senha, data_criado)
         VALUES (default, '$nome', '$email', '$senha', default)
@@ -41,7 +41,7 @@
         echo $sql;
         $conexao -> query($sql);
     } else {
-        echo "Usuário já existente";
+        echo "Usuário já existente ou email inválido";
     }
 
   
