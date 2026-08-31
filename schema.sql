@@ -35,7 +35,7 @@ DROP TABLE IF EXISTS `grupos`;
 --
 
 CREATE TABLE `grupos` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
   `data_criado` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -69,7 +69,7 @@ CREATE TABLE `user-participa` (
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
   `email` varchar(150) NOT NULL,
   `senha` varchar(150) NOT NULL,
@@ -82,33 +82,18 @@ CREATE TABLE `users` (
 -- Índices para tabelas despejadas
 --
 
---
--- Índices de tabela `grupos`
---
+
 ALTER TABLE `grupos`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices de tabela `users`
---
+
+
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT para tabelas despejadas
---
 
---
--- AUTO_INCREMENT de tabela `grupos`
---
-ALTER TABLE `grupos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de tabela `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

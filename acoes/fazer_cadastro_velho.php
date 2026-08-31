@@ -10,7 +10,7 @@
     VALUES (default, ?, ?, ?, default)
     ";
 
-    $stm = $conexao -> prepare($sql);
-    $stm -> execute([$nome, $email, $senha]);
+    $stmt = $conexao -> prepare($sql);
+    $stmt -> execute([$nome, $email, $senha]);
     
 ?>

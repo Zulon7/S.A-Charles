@@ -1,22 +1,24 @@
 <?php
 
     // Verifica se houve POST e se o usuário ou a senha é(são) vazio(s)
-    if (!empty($_POST) AND (empty($_POST["usuario"]) OR empty($_POST["senha"]))) {
+    if (!isset($_POST)) {
         header("Location: index.php"); exit;
     }
 
-
     require("db_con_init.php");
 
-    $usuario = $conexao -> real_escape_string($_POST["usuario"]);
-    $senha = $conexao -> real_escape_string($_POST["senha"]);
+    $nome = $_POST["nome"];
+    $senha = $_POST["senha"];
 
     // Validação do usuário/senha digitados
-    $sql = "SELECT `id`, `nome`, `nivel`, `senha` FROM `users` WHERE (`nome` = ".$usuario .")  AND (`ativo` = 1) LIMIT 1";
-    $resultado = $conexao -> query($sql);
-    $fileira =  $resultado -> fetch_assoc();
+    $sql = "SELECT `id`, `nome`, `nivel`, `senha` FROM `users` WHERE (`nome` = ?)  AND (`ativo` = 1) LIMIT 1";
+    $stmt = $conexao -> prepare($sql);
 
-    if (password_verify($senha ,$fileira['senha']))  {
+    $stmt -> execute([$nome]);
+
+    $fileira = $stmt -> fetch(PDO::FETCH_ASSOC);
+
+    if (!password_verify($senha ,$fileira['senha']))  {
         // Mensagem de erro quando os dados são inválidos e/ou o usuário não foi encontrado
         echo "Login inválido!"; exit;
     } else {
@@ -24,11 +26,7 @@
         session_start();
         $_SESSION['id'] = $fileira['id'];
         $_session['nivel'] = $fileira['nivel'];
-        $_SESSION['senha'] = $fileira['senha'];
     }
 
-    
-
-    $conexao -> close();
 
   ?>
