@@ -25,8 +25,8 @@ SET time_zone = "+00:00";
 
 
 DROP TABLE IF EXISTS `users`;
-DROP TABLE IF EXISTS `user-participa`;
-DROP TABLE IF EXISTS `user-modera`;
+DROP TABLE IF EXISTS `user_participa`;
+DROP TABLE IF EXISTS `user_modera`;
 DROP TABLE IF EXISTS `grupos`;
 
 
@@ -35,7 +35,7 @@ DROP TABLE IF EXISTS `grupos`;
 --
 
 CREATE TABLE `grupos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
   `data_criado` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -46,7 +46,7 @@ CREATE TABLE `grupos` (
 -- Estrutura para tabela `user-modera`
 --
 
-CREATE TABLE `user-modera` (
+CREATE TABLE `user_modera` (
   `id_user` int(11) NOT NULL,
   `id_grupo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -57,7 +57,7 @@ CREATE TABLE `user-modera` (
 -- Estrutura para tabela `user-participa`
 --
 
-CREATE TABLE `user-participa` (
+CREATE TABLE `user_participa` (
   `id_user` int(11) NOT NULL,
   `id_grupo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -69,9 +69,9 @@ CREATE TABLE `user-participa` (
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(150) NOT NULL,
-  `email` varchar(150) NOT NULL,
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `nome` varchar(150) NOT NULL UNIQUE,
+  `email` varchar(150) NOT NULL UNIQUE,
   `senha` varchar(150) NOT NULL,
   `data_criado` date NOT NULL DEFAULT current_timestamp(),
   `ativo` BIT NOT NULL DEFAULT 1,
@@ -83,13 +83,6 @@ CREATE TABLE `users` (
 --
 
 
-ALTER TABLE `grupos`
-  ADD PRIMARY KEY (`id`);
-
-
-
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
 
 
 

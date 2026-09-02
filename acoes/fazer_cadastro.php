@@ -13,33 +13,23 @@
     $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
 
     $sql = "SELECT `id`, `nome`, `email` FROM `users` WHERE ((`nome` = ?) OR (`email` = ?))  AND (`ativo` = 1) LIMIT 1";
-    $stmt = $conexao -> prepare($sql);// :email <- for later
+    $stmt = $conexao -> prepare($sql);
     $stmt -> execute([$nome, $email]);
 
 
     $resultado = $stmt -> fetch(PDO::FETCH_ASSOC);
 
 
-    if($resultado){
+    
 
-        $fileira =  $resultado[0];
-
-    } else {
-
-        $fileira['email'] = $email;
-        $fileira['email'] .= "diff";
-        $fileira['nome'] = $nome;
-        $fileira['nome'] .= "diff";
-
-    }
-
-    if (($fileira['email'] != $email) and ($fileira['nome'] != $nome) and filter_var($email, FILTER_VALIDATE_EMAIL)){
+    if (empty($resultado) and filter_var($email, FILTER_VALIDATE_EMAIL)){
         $sql = "
         INSERT INTO users (id, nome, email, senha, data_criado)
-        VALUES (default, '$nome', '$email', '$senha', default)
+        VALUES (default, ?, ?, ?, default)
         ";
-        echo $sql;
-        $conexao -> query($sql);
+        $stmt = $conexao -> prepare($sql);
+        $stmt -> execute([$nome, $email, $senha]);
+        
     } else {
         echo "Usuário já existente ou email inválido";
     }
