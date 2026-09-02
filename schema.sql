@@ -25,8 +25,8 @@ SET time_zone = "+00:00";
 
 
 DROP TABLE IF EXISTS `users`;
-DROP TABLE IF EXISTS `user-participa`;
-DROP TABLE IF EXISTS `user-modera`;
+DROP TABLE IF EXISTS `user_participa`;
+DROP TABLE IF EXISTS `user_modera`;
 DROP TABLE IF EXISTS `grupos`;
 
 
@@ -46,7 +46,7 @@ CREATE TABLE `grupos` (
 -- Estrutura para tabela `user-modera`
 --
 
-CREATE TABLE `user-modera` (
+CREATE TABLE `user_modera` (
   `id_user` int(11) NOT NULL,
   `id_grupo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -57,7 +57,7 @@ CREATE TABLE `user-modera` (
 -- Estrutura para tabela `user-participa`
 --
 
-CREATE TABLE `user-participa` (
+CREATE TABLE `user_participa` (
   `id_user` int(11) NOT NULL,
   `id_grupo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
