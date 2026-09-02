@@ -35,7 +35,7 @@ DROP TABLE IF EXISTS `grupos`;
 --
 
 CREATE TABLE `grupos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
   `data_criado` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -69,9 +69,9 @@ CREATE TABLE `user-participa` (
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(150) NOT NULL,
-  `email` varchar(150) NOT NULL,
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `nome` varchar(150) NOT NULL UNIQUE,
+  `email` varchar(150) NOT NULL UNIQUE,
   `senha` varchar(150) NOT NULL,
   `data_criado` date NOT NULL DEFAULT current_timestamp(),
   `ativo` BIT NOT NULL DEFAULT 1,
@@ -83,13 +83,6 @@ CREATE TABLE `users` (
 --
 
 
-ALTER TABLE `grupos`
-  ADD PRIMARY KEY (`id`);
-
-
-
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
 
 
 

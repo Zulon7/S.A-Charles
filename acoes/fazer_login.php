@@ -18,7 +18,7 @@
 
     $fileira = $stmt -> fetch(PDO::FETCH_ASSOC);
 
-    if (!password_verify($senha ,$fileira['senha']))  {
+    if (empty($fileira) or !password_verify($senha ,$fileira['senha']))  {
         // Mensagem de erro quando os dados são inválidos e/ou o usuário não foi encontrado
         echo "Login inválido!"; exit;
     } else {
