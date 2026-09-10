@@ -2,6 +2,17 @@
 <?php include('header.php'); ?>
 
 <div class = "login-wrapper">
+    
+    <?php if (isset($_SESSION["erro"])): ?>
+        <div class = "login-aviso" >
+            <span><?php echo $_SESSION["erro"]?></span>
+            <button onclick = "close('login-aviso');">
+                <i class="bi bi-x"></i>
+            </button>
+        </div>
+        <?php unset($_SESSION['erro'])?>
+    <?php endif ?>
+
     <form action="acoes/fazer_cadastro.php" method = "POST" class = "login-form">
         <div class = 'field'>
             <label for="nome">Email</label>

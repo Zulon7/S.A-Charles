@@ -1,12 +1,11 @@
 <?php
-    /*
-    $conexao = new mysqli("127.0.0.1", "root", "", "samedia");
-
-    if ($conexao->connect_errno) {
-        die("Erro: " . $conexao->connect_error);
+    if (!isset($_POST)) {
+        header('Location:../index.php'); exit;
     }
-    */
+
     require_once("db_con_init.php");
+    session_start();
+
 
     $nome = $_POST["nome"];
     $email = $_POST["email"];
@@ -29,9 +28,10 @@
         ";
         $stmt = $conexao -> prepare($sql);
         $stmt -> execute([$nome, $email, $senha]);
-        
+        header("Location:../index.php"); exit;
     } else {
-        echo "Usuário já existente ou email inválido";
+        $_SESSION['erro'] = "Usuário já existente ou email inválido";
+        header("Location:../cadastro.php"); exit;
     }
 
   
