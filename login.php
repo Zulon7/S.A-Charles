@@ -3,11 +3,10 @@
 
 
 <div class = "login-wrapper">
-    <?php $_SESSION['erro'] = "Usuário já existente ou email inválido"?>
     <?php if (isset($_SESSION["erro"])): ?>
         <div class = "login-aviso" >
             <span><?php echo $_SESSION["erro"]?></span>
-            <button>
+            <button onclick = "close_element('login-aviso');">
                 <i class="bi bi-x"></i>
             </button>
         </div>

@@ -1,11 +1,10 @@
-function close(target) {
-    console.log("entrou");
-    if (typeof target != "string") return;
-    console.log("passou");
-    elements = getElementsByClassName(target);
-
-    for (i = 0; i < length(elements); i++) {
+function close_element(target) {
+    if(typeof(target) != 'string') return;
+    elements = document.getElementsByClassName(target);
+    
+    for (i = 0; i < elements.length; i++) {
         elements[i].remove();
-        console.log("aaaaaaaaaaaa");
+
     }
 }
+

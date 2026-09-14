@@ -22,14 +22,12 @@
     if (empty($fileira) or !password_verify($senha ,$fileira['senha']))  {
         // Mensagem de erro quando os dados são inválidos e/ou o usuário não foi encontrado
    
-        $_SESSION['erro'] = 'Login Inválido!';
+        $_SESSION['erro'] = 'Login inválido';
         header("Location:../login.php"); exit;
     } else {
         // Salva os dados encontados na variável $fileira
-        session_start();
         $_SESSION['id'] = $fileira['id'];
         $_SESSION['nivel'] = $fileira['nivel'];
-        echo "deu certo";
     }
 
 
