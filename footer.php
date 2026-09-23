@@ -1,4 +1,10 @@
+</main>
 
+<footer class="footer">
+    <p>Footer</p>
+</footer>
+
+</div>
 
 
 <script src = "recursos/script.js"></script>

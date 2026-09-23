@@ -32,11 +32,11 @@ p{
     background-color: rgb(0, 0, 158);
     color: white;
     display: flex;
-    flex-flow: row;
+    flex-flow: column wrap;
     justify-content: space-between;
     align-items: stretch;
     flex: 1;
-    min-height: 100vh;
+    height: 100%;
     margin: 0;
 }
 
@@ -64,6 +64,7 @@ p{
 .main .sidebar-esq{
     padding-top: 7px;
     background-color: rgb(50,50,188);
+    flex: 1;
     flex-basis: 7%;
     padding-left:2vh;
     padding-right:2vh;

@@ -34,4 +34,4 @@
     <a href="login.php">Já tem uma conta? Faça login</a>
 </div>
 
-<?php include("footer_login.php");
+<?php include("footer.php");

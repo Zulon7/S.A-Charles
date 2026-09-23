@@ -1,6 +1,7 @@
 
 <?php include('header_login.php'); ?>
 
+<?php include('content.php'); ?>
 
 <div class = "login-wrapper">
     <?php if (isset($_SESSION["erro"])): ?>
