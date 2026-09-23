@@ -7,36 +7,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
 
-        <div class="main">
-            <div class="sidebar-esq">
-                <p>Esquerda</p>
-            </div>
-            <div class="central">
-                
-                <div class="header">
-                    <p>Header</p>
-                </div>
 
-                <div class="content">
-                    <p>Conteúdo</p>
-                </div>
-                
-                <div class="footer">
-                    <p>Footer</p>
-                </div>
-            </div>
-
-            <!--
-            <div class="sidebar-dir">
-                <p>Direita</p>
-            </div>
-            -->
+    <div class="wrapper">
+        <div class="sidebar-esq">
+            <p>Esquerda</p>
+        </div>
+        <div class="central">
             
+            <div class="header">
+                <p>Header</p>
+            </div>
+
+            <div class="content">
+                <p>Conteúdo</p>
+            </div>
+            
+            <div class="footer">
+                <p>Footer</p>
+            </div>
         </div>
 
         
     </div>
+
+        
+  
 </body>
 </html>
