@@ -1,5 +1,5 @@
 
-<?php include('header.php'); ?>
+<?php include('header_login.php'); ?>
 
 
 <div class = "login-wrapper">
@@ -28,4 +28,4 @@
     <a href="cadastro.php" style = "text-decoration: none">Não tem login? Faça cadastro</a>
 </div>
 
-<?php include("footer.php");
+<?php include("footer_login.php");

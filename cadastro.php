@@ -1,5 +1,5 @@
 
-<?php include('header.php'); ?>
+<?php include('header_login.php'); ?>
 
 <div class = "login-wrapper">
     
@@ -34,4 +34,4 @@
     <a href="login.php">Já tem uma conta? Faça login</a>
 </div>
 
-<?php include("footer.php");
+<?php include("footer_login.php");
