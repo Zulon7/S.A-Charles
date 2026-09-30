@@ -27,14 +27,14 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `user_participa`;
 DROP TABLE IF EXISTS `user_modera`;
-DROP TABLE IF EXISTS `grupos`;
+DROP TABLE IF EXISTS `turmas`;
 
 
 --
--- Estrutura para tabela `grupos`
+-- Estrutura para tabela `turmas`
 --
 
-CREATE TABLE `grupos` (
+CREATE TABLE `turmas` (
   `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
   `data_criado` date NOT NULL DEFAULT current_timestamp()
@@ -48,7 +48,7 @@ CREATE TABLE `grupos` (
 
 CREATE TABLE `user_modera` (
   `id_user` int(11) NOT NULL,
-  `id_grupo` int(11) NOT NULL
+  `id_turma` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -59,7 +59,7 @@ CREATE TABLE `user_modera` (
 
 CREATE TABLE `user_participa` (
   `id_user` int(11) NOT NULL,
-  `id_grupo` int(11) NOT NULL
+  `id_turma` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

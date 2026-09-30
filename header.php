@@ -17,9 +17,10 @@
     
         <div class="wrapper">
             <aside class = 'sidebar-esq'>
+                <!-- Arrumar isso depois, não sei se professores e alunos vão ter o mesmo sidebar -->
                 <?php if(isset($_SESSION['nivel']) && $_SESSION['nivel'] == 'aluno'): ?>
                 
-                     <a href="grupos.php">Grupos</a>
+                     <a href="turmas.php">Turmas</a>
                      <a href="projetos.php">Projetos</a>
                      <a href="feed.php">Feed</a>
                      <a href="conta.php">Conta</a>
