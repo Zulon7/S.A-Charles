@@ -1,12 +1,7 @@
-<?php include('..\header.php'); ?>
+<?php include(__DIR__ . '/../header.php'); ?>
 
-    <?php 
-        require_once('acoes/db_con_init.php'); 
-        $sql = "";
-        $conexao->prepare($sql);
-    
-    ?>
+ 
 
 
 
-<?php include('..\footer.php'); ?>
+<?php include(__DIR__ . '/../footer.php'); ?>
