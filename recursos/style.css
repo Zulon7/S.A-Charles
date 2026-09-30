@@ -33,7 +33,7 @@ a{
   background: gray;
 }
 
-.sidebar-esq a:last-child{
+.sidebar-esq a:nth-last-child(2){
     margin-top: auto;
 }
 

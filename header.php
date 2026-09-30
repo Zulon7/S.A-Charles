@@ -28,11 +28,11 @@
             <aside class = 'sidebar-esq'>
                 <!-- Arrumar isso depois, não sei se professores e alunos vão ter o mesmo sidebar -->
                 <?php if(isset($_SESSION['nivel']) && $_SESSION['nivel'] == 'aluno'): ?>
-                    <img src="<?= $base ?>/recursos/sesi-logo.png" height="1rem">
                     <a href="<?= $base ?>/paginas/turmas.php">Turmas</a>
                     <a href="<?= $base ?>/projetos.php">Projetos</a>
                     <a href="<?= $base ?>/feed.php">Feed</a>
                     <a href="<?= $base ?>/conta.php">Conta</a>
+                    <a href="<?= $base ?>/acoes/fazer_logout.php">Sair</a>
                 <?php endif ?>
             </aside>
             <div class="central">
