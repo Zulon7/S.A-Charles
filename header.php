@@ -9,7 +9,10 @@
 
     <title>Gerenciador de S.A</title>
 
-    <?php session_start(); ?>
+    <?php 
+        session_start(); 
+
+    ?>
     
     
 </head>
@@ -25,7 +28,7 @@
                      <a href="feed.php">Feed</a>
                      <a href="conta.php">Conta</a>
                 <?php endif ?>
-                </aside>
+            </aside>
             <div class="central">
                 
                 <header class="header">

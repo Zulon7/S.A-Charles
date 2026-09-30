@@ -28,6 +28,7 @@
         // Salva os dados encontados na variável $fileira
         $_SESSION['id'] = $fileira['id'];
         $_SESSION['nivel'] = $fileira['nivel'];
+        header("Location:../turmas.php");
     }
 
 
