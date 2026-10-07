@@ -38,6 +38,9 @@
             <div class="central">
                 
                 <header class="header">
-                <img src="<?= $base ?>/recursos/sesi-logo.png" height="100%">
-                <h1>Gerenciador de S.A</h1>
+                    <img src="<?= $base ?>/recursos/sesi-logo.png" height="100%">
+                    <h1>Gerenciador de S.A</h1>
+                </header>   
+                
+                <div class = "conteudo">
     

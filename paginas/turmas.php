@@ -24,7 +24,7 @@
     $turmas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<h2 class="turmas-titulo"><?= $titulo ?></h2>
+<h2 class="titulo"><?= $titulo ?></h2>
 
 <?php if (empty($turmas)): ?>
     <p class="turmas-vazio">Você ainda não está em nenhuma turma.</p>

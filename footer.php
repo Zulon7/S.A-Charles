@@ -1,9 +1,9 @@
 <?php /** @var string $base vem do header.php */ ?>
-</main>
 
 <footer class="footer">
 </footer>
 
+</div>
 </div>
 
 <script src = "<?= $base ?>/recursos/script.js"></script>
