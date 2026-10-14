@@ -1,0 +1,4 @@
+# Bloqueia o acesso direto aos arquivos enviados.
+# Eles só podem ser baixados por acoes/baixar_arquivo.php, que verifica se o usuário tem permissão.
+# Isso também impede que um arquivo .php enviado seja executado pelo Apache.
+Require all denied

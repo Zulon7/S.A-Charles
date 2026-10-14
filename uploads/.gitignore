@@ -1,0 +1,4 @@
+# Não envia os arquivos dos usuários para o git, só a pasta
+*
+!.gitignore
+!.htaccess

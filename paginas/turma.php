@@ -43,6 +43,15 @@
     $stmt = $conexao->prepare($sql);
     $stmt->execute([$turma['id']]);
     $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Projetos da turma (sem data de entrega ficam no final)
+    $sql = "SELECT id, nome, descricao, data_entrega
+            FROM projetos
+            WHERE id_turma = ?
+            ORDER BY data_entrega IS NULL, data_entrega";
+    $stmt = $conexao->prepare($sql);
+    $stmt->execute([$turma['id']]);
+    $projetos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <a class="voltar" href="<?= $base ?>/paginas/turmas.php"><i class="bi bi-arrow-left"></i> Voltar para turmas</a>
@@ -85,9 +94,16 @@
 </section>
 
 <section class="turma-secao">
-    <h3>Projetos</h3>
-    <!-- TODO: listar os projetos da turma quando a tabela de projetos existir -->
-    <p class="turmas-vazio">Os projetos da turma vão aparecer aqui.</p>
+    <h3>Projetos (<?= count($projetos) ?>)</h3>
+    <?php if (empty($projetos)): ?>
+        <p class="turmas-vazio">Nenhum projeto nesta turma ainda.</p>
+    <?php else: ?>
+        <div class="turmas-lista">
+            <?php foreach ($projetos as $projeto): ?>
+                <?php include(__DIR__ . '/../projeto_card.php'); ?>
+            <?php endforeach ?>
+        </div>
+    <?php endif ?>
 </section>
 
 <?php include(__DIR__ . '/../footer.php'); ?>

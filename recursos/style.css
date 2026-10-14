@@ -156,6 +156,42 @@ a{
     font-size: 0.9rem;
 }
 
+.turma-card .projeto-descricao {
+    margin-top: 0.5rem;
+    color: black;
+}
+
+.upload-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.upload-form button {
+    background-color: rgb(56, 139, 56);
+    color: white;
+    border-style: none;
+    border-radius: 0.2rem;
+    padding: 0.3rem 0.8rem;
+}
+
+.upload-form small {
+    color: gray;
+}
+
+.aviso-sucesso {
+    background-color: rgb(214, 245, 214);
+    border-color: rgb(157, 206, 157);
+    height: auto;
+    margin-bottom: 0.5rem;
+}
+
+.aviso-sucesso button i {
+    color: rgb(56, 139, 56);
+}
+
 .voltar {
     display: inline-block;
     margin-top: 1rem;

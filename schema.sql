@@ -28,6 +28,8 @@ DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `user_participa`;
 DROP TABLE IF EXISTS `user_modera`;
 DROP TABLE IF EXISTS `turmas`;
+DROP TABLE IF EXISTS `projetos`;
+DROP TABLE IF EXISTS `arquivos`;
 
 
 --
@@ -38,6 +40,40 @@ CREATE TABLE `turmas` (
   `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
   `data_criado` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `projetos`
+-- Cada projeto pertence a uma turma (id_turma)
+--
+
+CREATE TABLE `projetos` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id_turma` int(11) NOT NULL,
+  `nome` varchar(150) NOT NULL,
+  `descricao` text,
+  `data_criado` date NOT NULL DEFAULT current_timestamp(),
+  `data_entrega` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `arquivos`
+-- Arquivos enviados para um projeto. O arquivo fica na pasta uploads/
+-- com um nome aleatório (nome_salvo); nome_original é o nome que o usuário enviou
+--
+
+CREATE TABLE `arquivos` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id_projeto` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `nome_original` varchar(255) NOT NULL,
+  `nome_salvo` varchar(64) NOT NULL UNIQUE,
+  `tamanho` int(11) NOT NULL,
+  `data_envio` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

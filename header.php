@@ -26,14 +26,12 @@
     
         <div class="wrapper">
             <aside class = 'sidebar-esq'>
-                <!-- Arrumar isso depois, não sei se professores e alunos vão ter o mesmo sidebar -->
-                <?php if(isset($_SESSION['nivel']) && $_SESSION['nivel'] == 'aluno'): ?>
-                    <a href="<?= $base ?>/paginas/turmas.php">Turmas</a>
-                    <a href="<?= $base ?>/projetos.php">Projetos</a>
-                    <a href="<?= $base ?>/feed.php">Feed</a>
-                    <a href="<?= $base ?>/conta.php">Conta</a>
-                    <a href="<?= $base ?>/acoes/fazer_logout.php">Sair</a>
-                <?php endif ?>
+                <!-- Por enquanto professores e alunos usam o mesmo sidebar -->
+                <a href="<?= $base ?>/paginas/turmas.php">Turmas</a>
+                <a href="<?= $base ?>/paginas/projetos.php">Projetos</a>
+                <a href="<?= $base ?>/feed.php">Feed</a>
+                <a href="<?= $base ?>/conta.php">Conta</a>
+                <a href="<?= $base ?>/acoes/fazer_logout.php">Sair</a>
             </aside>
             <div class="central">
                 

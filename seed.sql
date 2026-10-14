@@ -31,3 +31,13 @@
     (8, 2),
     (2, 3), (8, 3),
     (8, 4);
+
+    -- Projetos de cada turma
+    -- A turma 4 (Robótica) ainda não tem projetos
+    -- O projeto 5 não tem data de entrega, para testar esse caso
+    INSERT INTO projetos (id, id_turma, nome, descricao, data_criado, data_entrega) VALUES
+    (1, 1, 'Site da Escola',          'Criar um site com as informações da escola usando HTML e CSS.', '2026-02-15', '2026-11-20'),
+    (2, 1, 'Calculadora em PHP',      'Calculadora com as quatro operações básicas.',                  '2026-03-10', '2026-04-10'),
+    (3, 2, 'Sistema de Biblioteca',   'Cadastro de livros e empréstimos com banco de dados.',          '2026-03-05', '2026-12-01'),
+    (4, 3, 'Braço Robótico',          'Montar e programar um braço robótico com Arduino.',             '2026-04-01', '2026-10-30'),
+    (5, 3, 'Esteira Automatizada',    NULL,                                                             '2026-09-15', NULL);
