@@ -31,11 +31,11 @@
 <?php else: ?>
     <div class="turmas-lista">
         <?php foreach ($turmas as $turma): ?>
-            <div class="turma-card">
+            <a class="turma-card" href="<?= $base ?>/paginas/turma.php?id=<?= $turma['id'] ?>">
                 <h3><?= htmlspecialchars($turma['nome']) ?></h3>
                 <p><i class="bi bi-people"></i> <?= $turma['total_alunos'] ?> aluno(s)</p>
                 <p><i class="bi bi-calendar"></i> Criada em <?= date('d/m/Y', strtotime($turma['data_criado'])) ?></p>
-            </div>
+            </a>
         <?php endforeach ?>
     </div>
 <?php endif ?>
