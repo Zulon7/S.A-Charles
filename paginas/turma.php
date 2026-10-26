@@ -2,6 +2,7 @@
 
 <?php
     require_once(__DIR__ . '/../acoes/db_con_init.php');
+    require_once(__DIR__ . '/../acoes/permissoes.php');
 
     // Id da turma vem da URL: turma.php?id=1
     $id_turma = $_GET['id'] ?? null;
@@ -44,14 +45,20 @@
     $stmt->execute([$turma['id']]);
     $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Projetos da turma (sem data de entrega ficam no final)
-    $sql = "SELECT id, nome, descricao, data_entrega
-            FROM projetos
-            WHERE id_turma = ?
-            ORDER BY data_entrega IS NULL, data_entrega";
+    // Propostas da turma (sem data de entrega ficam no final)
+    // total_projetos e id_meu_projeto são usados no card (ver proposta_card.php)
+    $sql = "SELECT pr.id, pr.nome, pr.descricao, pr.data_entrega,
+                   (SELECT COUNT(*) FROM projetos pj WHERE pj.id_proposta = pr.id) AS total_projetos,
+                   (SELECT pj.id FROM projetos pj WHERE pj.id_proposta = pr.id AND pj.id_aluno = ?) AS id_meu_projeto
+            FROM propostas pr
+            WHERE pr.id_turma = ?
+            ORDER BY pr.data_entrega IS NULL, pr.data_entrega";
     $stmt = $conexao->prepare($sql);
-    $stmt->execute([$turma['id']]);
-    $projetos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->execute([$_SESSION['id'], $turma['id']]);
+    $propostas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Só professores da turma podem criar propostas
+    $e_professor = e_professor_da_turma($conexao, $_SESSION['id'], $turma['id']);
 ?>
 
 <a class="voltar" href="<?= $base ?>/paginas/turmas.php"><i class="bi bi-arrow-left"></i> Voltar para turmas</a>
@@ -94,16 +101,36 @@
 </section>
 
 <section class="turma-secao">
-    <h3>Projetos (<?= count($projetos) ?>)</h3>
-    <?php if (empty($projetos)): ?>
-        <p class="turmas-vazio">Nenhum projeto nesta turma ainda.</p>
+    <h3>Propostas (<?= count($propostas) ?>)</h3>
+    <?php if (empty($propostas)): ?>
+        <p class="turmas-vazio">Nenhuma proposta nesta turma ainda.</p>
     <?php else: ?>
         <div class="turmas-lista">
-            <?php foreach ($projetos as $projeto): ?>
-                <?php include(__DIR__ . '/../projeto_card.php'); ?>
+            <?php foreach ($propostas as $proposta): ?>
+                <?php include(__DIR__ . '/../proposta_card.php'); ?>
             <?php endforeach ?>
         </div>
     <?php endif ?>
 </section>
+
+<?php if ($e_professor): ?>
+    <section class="turma-secao">
+        <h3>Nova proposta</h3>
+        <?php include(__DIR__ . '/../avisos.php'); ?>
+        <form class="form-simples" action="<?= $base ?>/acoes/criar_proposta.php?turma=<?= $turma['id'] ?>" method="POST">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" maxlength="150" required>
+
+            <label for="descricao">Descrição (opcional)</label>
+            <textarea id="descricao" name="descricao" rows="4"></textarea>
+
+            <label for="data_entrega">Data de entrega (opcional)</label>
+            <input type="date" id="data_entrega" name="data_entrega">
+
+            <button type="submit"><i class="bi bi-plus-lg"></i> Criar proposta</button>
+            <small>Depois de criar, você pode anexar arquivos na página da proposta.</small>
+        </form>
+    </section>
+<?php endif ?>
 
 <?php include(__DIR__ . '/../footer.php'); ?>

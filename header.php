@@ -28,7 +28,7 @@
             <aside class = 'sidebar-esq'>
                 <!-- Por enquanto professores e alunos usam o mesmo sidebar -->
                 <a href="<?= $base ?>/paginas/turmas.php">Turmas</a>
-                <a href="<?= $base ?>/paginas/projetos.php">Projetos</a>
+                <a href="<?= $base ?>/paginas/propostas.php">Propostas</a>
                 <a href="<?= $base ?>/feed.php">Feed</a>
                 <a href="<?= $base ?>/conta.php">Conta</a>
                 <a href="<?= $base ?>/acoes/fazer_logout.php">Sair</a>

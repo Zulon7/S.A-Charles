@@ -161,6 +161,46 @@ a{
     color: black;
 }
 
+/* "p.status-..." para ganhar do ".turma-card p", que deixa o texto cinza */
+.status-enviado,
+.turma-card p.status-enviado {
+    color: rgb(56, 139, 56);
+}
+
+.status-pendente,
+.turma-card p.status-pendente {
+    color: rgb(200, 120, 0);
+}
+
+.form-simples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    max-width: 30rem;
+    margin-top: 1rem;
+}
+
+.form-simples input,
+.form-simples textarea {
+    border: 1px solid rgb(189, 189, 189);
+    border-radius: 0.2rem;
+    padding: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-simples button {
+    align-self: flex-start;
+    background-color: rgb(56, 139, 56);
+    color: white;
+    border-style: none;
+    border-radius: 0.2rem;
+    padding: 0.4rem 1rem;
+}
+
+.form-simples small {
+    color: gray;
+}
+
 .upload-form {
     display: flex;
     flex-wrap: wrap;

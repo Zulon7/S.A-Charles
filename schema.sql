@@ -28,6 +28,7 @@ DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `user_participa`;
 DROP TABLE IF EXISTS `user_modera`;
 DROP TABLE IF EXISTS `turmas`;
+DROP TABLE IF EXISTS `propostas`;
 DROP TABLE IF EXISTS `projetos`;
 DROP TABLE IF EXISTS `arquivos`;
 
@@ -45,13 +46,15 @@ CREATE TABLE `turmas` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `projetos`
--- Cada projeto pertence a uma turma (id_turma)
+-- Estrutura para tabela `propostas`
+-- Um professor cria uma proposta em uma turma (id_turma)
+-- e os alunos da turma enviam projetos para ela
 --
 
-CREATE TABLE `projetos` (
+CREATE TABLE `propostas` (
   `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_turma` int(11) NOT NULL,
+  `id_professor` int(11) NOT NULL,
   `nome` varchar(150) NOT NULL,
   `descricao` text,
   `data_criado` date NOT NULL DEFAULT current_timestamp(),
@@ -61,14 +64,35 @@ CREATE TABLE `projetos` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `projetos`
+-- Projeto que um aluno (id_aluno) envia para uma proposta (id_proposta)
+-- Cada aluno só pode ter um projeto por proposta (UNIQUE)
+--
+
+CREATE TABLE `projetos` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id_proposta` int(11) NOT NULL,
+  `id_aluno` int(11) NOT NULL,
+  `nome` varchar(150) NOT NULL,
+  `descricao` text,
+  `data_criado` datetime NOT NULL DEFAULT current_timestamp(),
+  UNIQUE (`id_proposta`, `id_aluno`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `arquivos`
--- Arquivos enviados para um projeto. O arquivo fica na pasta uploads/
--- com um nome aleatório (nome_salvo); nome_original é o nome que o usuário enviou
+-- Arquivos anexados a uma proposta (pelo professor) OU a um projeto (pelo aluno).
+-- Só uma das duas colunas é preenchida: id_proposta ou id_projeto.
+-- O arquivo fica na pasta uploads/ com um nome aleatório (nome_salvo);
+-- nome_original é o nome que o usuário enviou
 --
 
 CREATE TABLE `arquivos` (
   `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `id_projeto` int(11) NOT NULL,
+  `id_proposta` int(11) DEFAULT NULL,
+  `id_projeto` int(11) DEFAULT NULL,
   `id_user` int(11) NOT NULL,
   `nome_original` varchar(255) NOT NULL,
   `nome_salvo` varchar(64) NOT NULL UNIQUE,

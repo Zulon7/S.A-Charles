@@ -32,12 +32,21 @@
     (2, 3), (8, 3),
     (8, 4);
 
-    -- Projetos de cada turma
-    -- A turma 4 (Robótica) ainda não tem projetos
-    -- O projeto 5 não tem data de entrega, para testar esse caso
-    INSERT INTO projetos (id, id_turma, nome, descricao, data_criado, data_entrega) VALUES
-    (1, 1, 'Site da Escola',          'Criar um site com as informações da escola usando HTML e CSS.', '2026-02-15', '2026-11-20'),
-    (2, 1, 'Calculadora em PHP',      'Calculadora com as quatro operações básicas.',                  '2026-03-10', '2026-04-10'),
-    (3, 2, 'Sistema de Biblioteca',   'Cadastro de livros e empréstimos com banco de dados.',          '2026-03-05', '2026-12-01'),
-    (4, 3, 'Braço Robótico',          'Montar e programar um braço robótico com Arduino.',             '2026-04-01', '2026-10-30'),
-    (5, 3, 'Esteira Automatizada',    NULL,                                                             '2026-09-15', NULL);
+    -- Propostas criadas pelos professores em cada turma
+    -- A turma 4 (Robótica) ainda não tem propostas
+    -- A proposta 5 não tem data de entrega, para testar esse caso
+    INSERT INTO propostas (id, id_turma, id_professor, nome, descricao, data_criado, data_entrega) VALUES
+    (1, 1, 2, 'Site da Escola',          'Criar um site com as informações da escola usando HTML e CSS.', '2026-02-15', '2026-11-20'),
+    (2, 1, 2, 'Calculadora em PHP',      'Calculadora com as quatro operações básicas.',                  '2026-03-10', '2026-04-10'),
+    (3, 2, 8, 'Sistema de Biblioteca',   'Cadastro de livros e empréstimos com banco de dados.',          '2026-03-05', '2026-12-01'),
+    (4, 3, 2, 'Braço Robótico',          'Montar e programar um braço robótico com Arduino.',             '2026-04-01', '2026-10-30'),
+    (5, 3, 8, 'Esteira Automatizada',    NULL,                                                             '2026-09-15', NULL);
+
+    -- Projetos enviados pelos alunos
+    -- CaraLegal (1) enviou para a proposta 2, mas ainda não para a 1 nem para a 3
+    INSERT INTO projetos (id, id_proposta, id_aluno, nome, descricao, data_criado) VALUES
+    (1, 1, 3, 'Site da ETEC Charles',   'Site com página inicial, cursos e contato.',      '2026-03-20 14:30:00'),
+    (2, 2, 1, 'Minha Calculadora',      'Calculadora feita com formulário e PHP.',         '2026-04-08 10:15:00'),
+    (3, 2, 4, 'Calculadora Científica', 'Além das quatro operações, tem raiz e potência.', '2026-04-09 16:45:00'),
+    (4, 3, 5, 'BiblioTech',             NULL,                                              '2026-05-02 09:00:00'),
+    (5, 4, 6, 'Braço com Servos',       'Braço com 3 servos controlados por Arduino Uno.', '2026-09-28 11:20:00');
