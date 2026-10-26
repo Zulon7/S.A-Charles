@@ -112,6 +112,8 @@
                 <a href="<?= $base ?>/paginas/projeto.php?id=<?= $meu_projeto['id'] ?>"><?= htmlspecialchars($meu_projeto['nome']) ?></a>
                 <small class="turmas-vazio">criado em <?= date('d/m/Y H:i', strtotime($meu_projeto['data_criado'])) ?></small>
             </p>
+        <?php elseif ($proposta['prazo_encerrado']): ?>
+            <p class="prazo-encerrado"><i class="bi bi-lock"></i> O prazo de entrega já passou e você não enviou um projeto.</p>
         <?php else: ?>
             <p class="turmas-vazio">Você ainda não enviou um projeto para esta proposta.</p>
             <a class="botao" href="<?= $base ?>/paginas/novo_projeto.php?proposta=<?= $proposta['id'] ?>"><i class="bi bi-plus-lg"></i> Criar projeto</a>

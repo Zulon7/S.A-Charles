@@ -39,6 +39,8 @@
         Você já tem um projeto nesta proposta:
         <a href="<?= $base ?>/paginas/projeto.php?id=<?= $meu_projeto['id'] ?>"><?= htmlspecialchars($meu_projeto['nome']) ?></a>
     </p>
+<?php elseif ($proposta['prazo_encerrado']): ?>
+    <p class="prazo-encerrado"><i class="bi bi-lock"></i> O prazo de entrega desta proposta já passou.</p>
 <?php else: ?>
     <form class="form-simples" action="<?= $base ?>/acoes/criar_projeto.php?proposta=<?= $proposta['id'] ?>" method="POST">
         <label for="nome">Nome do projeto</label>

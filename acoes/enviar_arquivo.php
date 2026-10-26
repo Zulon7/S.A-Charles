@@ -39,6 +39,12 @@
 
         $id_projeto = $projeto['id'];
         $voltar = "Location:../paginas/projeto.php?id=" . $id_projeto;
+
+        // Depois do prazo de entrega o aluno não pode mais enviar arquivos
+        if (!$projeto['pode_alterar']) {
+            $_SESSION['erro'] = 'O prazo de entrega já passou. Não é possível enviar arquivos.';
+            header($voltar); exit;
+        }
     }
 
     if (!isset($_FILES['arquivo'])) {

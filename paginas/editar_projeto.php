@@ -13,6 +13,14 @@
         include(__DIR__ . '/../footer.php');
         exit;
     }
+
+    // Depois do prazo de entrega não dá mais para editar
+    if (!$projeto['pode_alterar']) {
+        echo '<h2 class="titulo">Prazo encerrado</h2>';
+        echo '<p class="prazo-encerrado"><i class="bi bi-lock"></i> O prazo de entrega já passou. O projeto não pode mais ser alterado.</p>';
+        include(__DIR__ . '/../footer.php');
+        exit;
+    }
 ?>
 
 <h2 class="titulo">Editar projeto</h2>

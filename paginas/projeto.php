@@ -31,14 +31,28 @@
     Proposta: <a href="<?= $base ?>/paginas/proposta.php?id=<?= $projeto['id_proposta'] ?>"><?= htmlspecialchars($projeto['nome_proposta']) ?></a>
     · Aluno: <?= htmlspecialchars($projeto['nome_aluno']) ?>
     · Criado em <?= date('d/m/Y H:i', strtotime($projeto['data_criado'])) ?>
+    · <?php if ($projeto['data_entrega']): ?>
+        Entrega até <?= date('d/m/Y', strtotime($projeto['data_entrega'])) ?>
+    <?php else: ?>
+        Sem data de entrega
+    <?php endif ?>
 </p>
 
-<!-- Só o aluno dono do projeto pode editar -->
-<?php if ($projeto['e_autor']): ?>
-    <a class="botao" href="<?= $base ?>/paginas/editar_projeto.php?id=<?= $projeto['id'] ?>"><i class="bi bi-pencil"></i> Editar projeto</a>
-<?php endif ?>
-
 <?php include(__DIR__ . '/../avisos.php'); ?>
+
+<!-- Só o aluno dono pode editar ou apagar, e só até o prazo de entrega -->
+<?php if ($projeto['pode_alterar']): ?>
+    <div class="acoes-projeto">
+        <a class="botao" href="<?= $base ?>/paginas/editar_projeto.php?id=<?= $projeto['id'] ?>"><i class="bi bi-pencil"></i> Editar projeto</a>
+
+        <form action="<?= $base ?>/acoes/apagar_projeto.php?id=<?= $projeto['id'] ?>" method="POST"
+              onsubmit="return confirm('Apagar este projeto e todos os arquivos dele? Isso não pode ser desfeito.');">
+            <button type="submit" class="botao botao-perigo"><i class="bi bi-trash"></i> Apagar projeto</button>
+        </form>
+    </div>
+<?php elseif ($projeto['e_autor']): ?>
+    <p class="prazo-encerrado"><i class="bi bi-lock"></i> O prazo de entrega já passou. O projeto não pode mais ser alterado.</p>
+<?php endif ?>
 
 <section class="turma-secao">
     <h3>Descrição</h3>
@@ -52,8 +66,9 @@
 <section class="turma-secao">
     <h3>Arquivos (<?= count($arquivos) ?>)</h3>
     <?php
-        // Só o aluno dono do projeto envia arquivos
-        $pode_enviar = $projeto['e_autor'];
+        // Só o aluno dono do projeto envia e apaga arquivos, e só até o prazo
+        $pode_enviar = $projeto['pode_alterar'];
+        $pode_apagar = $projeto['pode_alterar'];
         $url_envio = "$base/acoes/enviar_arquivo.php?projeto=" . $projeto['id'];
         include(__DIR__ . '/../arquivos_lista.php');
     ?>

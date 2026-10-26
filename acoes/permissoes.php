@@ -14,6 +14,12 @@
         return (bool) $stmt->fetch();
     }
 
+    // O prazo de entrega já passou? O aluno pode mexer até o fim do dia da entrega.
+    // Proposta sem data de entrega nunca fecha.
+    function prazo_encerrado($data_entrega) {
+        return $data_entrega && date('Y-m-d') > $data_entrega;
+    }
+
     // Busca uma proposta, mas só se o usuário participa ou administra a turma dela.
     // Retorna os dados da proposta (com o nome da turma e do professor) ou false.
     // 'e_professor' diz se o usuário é professor da turma (pode anexar arquivos).
@@ -32,6 +38,7 @@
 
         $proposta['e_professor'] = e_professor_da_turma($conexao, $id_user, $proposta['id_turma']);
         $proposta['e_aluno'] = e_aluno_da_turma($conexao, $id_user, $proposta['id_turma']);
+        $proposta['prazo_encerrado'] = prazo_encerrado($proposta['data_entrega']);
 
         if (!$proposta['e_professor'] && !$proposta['e_aluno']) return false;
 
@@ -40,11 +47,13 @@
 
     // Busca um projeto, mas só se o usuário é o aluno que fez ele
     // ou professor da turma da proposta. Retorna os dados ou false.
-    // 'e_autor' diz se o usuário é o aluno do projeto (pode enviar arquivos).
+    // 'e_autor' diz se o usuário é o aluno do projeto.
+    // 'pode_alterar' diz se ele ainda pode editar, enviar/apagar arquivos ou apagar o projeto
+    // (só o autor, e só até o prazo de entrega da proposta).
     function buscar_projeto_do_usuario($conexao, $id_user, $id_projeto) {
         $sql = "SELECT pj.id, pj.id_aluno, pj.nome, pj.descricao, pj.data_criado,
                        a.nome AS nome_aluno,
-                       pr.id AS id_proposta, pr.nome AS nome_proposta, pr.id_turma
+                       pr.id AS id_proposta, pr.nome AS nome_proposta, pr.id_turma, pr.data_entrega
                 FROM projetos pj
                 INNER JOIN propostas pr ON pr.id = pj.id_proposta
                 INNER JOIN users a ON a.id = pj.id_aluno
@@ -56,6 +65,8 @@
         if (!$projeto) return false;
 
         $projeto['e_autor'] = ($projeto['id_aluno'] == $id_user);
+        $projeto['prazo_encerrado'] = prazo_encerrado($projeto['data_entrega']);
+        $projeto['pode_alterar'] = $projeto['e_autor'] && !$projeto['prazo_encerrado'];
 
         if (!$projeto['e_autor'] && !e_professor_da_turma($conexao, $id_user, $projeto['id_turma'])) return false;
 

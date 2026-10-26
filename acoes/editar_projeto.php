@@ -17,6 +17,12 @@
         header("Location:../paginas/projetos.php"); exit;
     }
 
+    // Depois do prazo de entrega o projeto não pode mais ser alterado
+    if (!$projeto['pode_alterar']) {
+        $_SESSION['erro'] = 'O prazo de entrega já passou. O projeto não pode mais ser alterado.';
+        header("Location:../paginas/projeto.php?id=" . $projeto['id']); exit;
+    }
+
     $nome = trim($_POST['nome'] ?? '');
     $descricao = trim($_POST['descricao'] ?? '');
 

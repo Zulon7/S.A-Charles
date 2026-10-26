@@ -216,6 +216,40 @@ a{
     background-color: rgb(45, 115, 45);
 }
 
+/* Botão vermelho, para ações de apagar */
+.botao-perigo {
+    border-style: none;
+    background-color: rgb(200, 60, 60);
+}
+
+.botao-perigo:hover {
+    background-color: rgb(170, 45, 45);
+}
+
+/* Botões "Editar" e "Apagar" lado a lado */
+.acoes-projeto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.prazo-encerrado {
+    color: rgb(170, 45, 45);
+    margin-top: 0.5rem;
+}
+
+/* Botão de lixeira em cada arquivo da lista */
+.form-apagar {
+    margin-left: auto;
+}
+
+.form-apagar button {
+    border-style: none;
+    background-color: transparent;
+    color: rgb(200, 60, 60);
+}
+
 .upload-form {
     display: flex;
     flex-wrap: wrap;

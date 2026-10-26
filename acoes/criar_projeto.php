@@ -29,6 +29,12 @@
         header("Location:../paginas/projeto.php?id=" . $existente); exit;
     }
 
+    // Depois do prazo de entrega não dá para criar projeto
+    if ($proposta['prazo_encerrado']) {
+        $_SESSION['erro'] = 'O prazo de entrega desta proposta já passou.';
+        header("Location:../paginas/proposta.php?id=" . $proposta['id']); exit;
+    }
+
     $nome = trim($_POST['nome'] ?? '');
     $descricao = trim($_POST['descricao'] ?? '');
 
