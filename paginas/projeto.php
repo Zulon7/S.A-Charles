@@ -10,7 +10,6 @@
     // Projeto não existe, ou o usuário não é o aluno dele nem professor da turma
     if (!$projeto) {
         echo '<h2 class="titulo">Projeto não encontrado</h2>';
-        echo '<a class="voltar" href="' . $base . '/paginas/propostas.php"><i class="bi bi-arrow-left"></i> Voltar para propostas</a>';
         include(__DIR__ . '/../footer.php');
         exit;
     }
@@ -26,7 +25,6 @@
     $arquivos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<a class="voltar" href="<?= $base ?>/paginas/proposta.php?id=<?= $projeto['id_proposta'] ?>"><i class="bi bi-arrow-left"></i> Voltar para a proposta</a>
 
 <h2 class="titulo"><?= htmlspecialchars($projeto['nome']) ?></h2>
 <p class="turma-info">
@@ -34,6 +32,11 @@
     · Aluno: <?= htmlspecialchars($projeto['nome_aluno']) ?>
     · Criado em <?= date('d/m/Y H:i', strtotime($projeto['data_criado'])) ?>
 </p>
+
+<!-- Só o aluno dono do projeto pode editar -->
+<?php if ($projeto['e_autor']): ?>
+    <a class="botao" href="<?= $base ?>/paginas/editar_projeto.php?id=<?= $projeto['id'] ?>"><i class="bi bi-pencil"></i> Editar projeto</a>
+<?php endif ?>
 
 <?php include(__DIR__ . '/../avisos.php'); ?>
 

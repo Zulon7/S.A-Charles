@@ -10,7 +10,6 @@
     // Proposta não existe ou o usuário não faz parte da turma dela
     if (!$proposta) {
         echo '<h2 class="titulo">Proposta não encontrada</h2>';
-        echo '<a class="voltar" href="' . $base . '/paginas/propostas.php"><i class="bi bi-arrow-left"></i> Voltar para propostas</a>';
         include(__DIR__ . '/../footer.php');
         exit;
     }
@@ -49,7 +48,6 @@
     }
 ?>
 
-<a class="voltar" href="<?= $base ?>/paginas/propostas.php"><i class="bi bi-arrow-left"></i> Voltar para propostas</a>
 
 <h2 class="titulo"><?= htmlspecialchars($proposta['nome']) ?></h2>
 <p class="turma-info">
@@ -116,15 +114,7 @@
             </p>
         <?php else: ?>
             <p class="turmas-vazio">Você ainda não enviou um projeto para esta proposta.</p>
-            <form class="form-simples" action="<?= $base ?>/acoes/criar_projeto.php?proposta=<?= $proposta['id'] ?>" method="POST">
-                <label for="nome">Nome do projeto</label>
-                <input type="text" id="nome" name="nome" maxlength="150" required>
-
-                <label for="descricao">Descrição (opcional)</label>
-                <textarea id="descricao" name="descricao" rows="3"></textarea>
-
-                <button type="submit"><i class="bi bi-plus-lg"></i> Criar projeto</button>
-            </form>
+            <a class="botao" href="<?= $base ?>/paginas/novo_projeto.php?proposta=<?= $proposta['id'] ?>"><i class="bi bi-plus-lg"></i> Criar projeto</a>
         <?php endif ?>
     </section>
 

@@ -20,7 +20,6 @@
     // Turma não existe ou o usuário não faz parte dela
     if (!$turma) {
         echo '<h2 class="titulo">Turma não encontrada</h2>';
-        echo '<a class="voltar" href="' . $base . '/paginas/turmas.php"><i class="bi bi-arrow-left"></i> Voltar para turmas</a>';
         include(__DIR__ . '/../footer.php');
         exit;
     }
@@ -61,7 +60,6 @@
     $e_professor = e_professor_da_turma($conexao, $_SESSION['id'], $turma['id']);
 ?>
 
-<a class="voltar" href="<?= $base ?>/paginas/turmas.php"><i class="bi bi-arrow-left"></i> Voltar para turmas</a>
 
 <h2 class="titulo"><?= htmlspecialchars($turma['nome']) ?></h2>
 <p class="turma-info">Criada em <?= date('d/m/Y', strtotime($turma['data_criado'])) ?></p>

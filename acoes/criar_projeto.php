@@ -17,7 +17,8 @@
         header("Location:../paginas/propostas.php"); exit;
     }
 
-    $voltar = "Location:../paginas/proposta.php?id=" . $proposta['id'];
+    // Em caso de erro, volta para o formulário
+    $voltar = "Location:../paginas/novo_projeto.php?proposta=" . $proposta['id'];
 
     // Cada aluno só pode ter um projeto por proposta
     $stmt = $conexao->prepare("SELECT id FROM projetos WHERE id_proposta = ? AND id_aluno = ?");
