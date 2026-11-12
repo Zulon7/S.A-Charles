@@ -317,6 +317,12 @@ a{
     border-bottom: 1px solid rgb(230, 230, 230);
 }
 
+/* Página da conta: rótulo em cinza com largura fixa, valor ao lado */
+.conta-info span {
+    color: gray;
+    width: 9rem;
+}
+
 .membros-lista small {
     color: gray;
 }
