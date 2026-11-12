@@ -19,8 +19,8 @@
         </div>
         
         <div class = 'field'>
-            <label for="nome">Senha</label>
-            <input type="text" id = "senha" name = "senha">
+            <label for="senha">Senha</label>
+            <input type="password" id = "senha" name = "senha">
         </div>
 
         <input class = "submit" type="submit" value="Fazer login">

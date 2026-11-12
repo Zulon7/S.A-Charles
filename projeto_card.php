@@ -2,7 +2,7 @@
     /**
      * Card de um projeto. Usado em paginas/projetos.php
      * O card inteiro é um link para a página do projeto.
-     * @var array $projeto precisa ter: id, nome, descricao, data_criado,
+     * @var array $projeto precisa ter: id, nome, descricao, data_criado, data_enviado,
      *                     nome_proposta, nome_turma, nome_aluno, total_arquivos
      * @var string $base vem do header.php
      */
@@ -20,6 +20,13 @@
 
     <p><i class="bi bi-paperclip"></i> <?= $projeto['total_arquivos'] ?> arquivo(s)</p>
     <p><i class="bi bi-calendar"></i> Criado em <?= date('d/m/Y', strtotime($projeto['data_criado'])) ?></p>
+
+    <!-- Rascunho só aparece para o aluno; os outros só veem projetos enviados -->
+    <?php if ($projeto['data_enviado']): ?>
+        <p class="status-enviado"><i class="bi bi-check-circle"></i> Enviado em <?= date('d/m/Y', strtotime($projeto['data_enviado'])) ?></p>
+    <?php else: ?>
+        <p class="status-pendente"><i class="bi bi-clock"></i> Rascunho (não enviado)</p>
+    <?php endif ?>
 
     <?php if ($projeto['descricao']): ?>
         <p class="projeto-descricao"><?= htmlspecialchars($projeto['descricao']) ?></p>

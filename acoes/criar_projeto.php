@@ -52,8 +52,9 @@
         $descricao == '' ? null : $descricao
     ]);
 
-    // Vai para a página do novo projeto, onde o aluno envia os arquivos
-    $_SESSION['sucesso'] = 'Projeto criado! Agora envie os arquivos abaixo.';
+    // Vai para a página do novo projeto, onde o aluno anexa os arquivos.
+    // O projeto começa como rascunho: só fica público depois do "Enviar projeto"
+    $_SESSION['sucesso'] = 'Projeto criado como rascunho. Anexe os arquivos e clique em "Enviar projeto" quando estiver pronto.';
     header("Location:../paginas/projeto.php?id=" . $conexao->lastInsertId()); exit;
 
 ?>

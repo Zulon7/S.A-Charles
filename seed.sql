@@ -44,9 +44,18 @@
 
     -- Projetos enviados pelos alunos
     -- CaraLegal (1) enviou para a proposta 2, mas ainda não para a 1 nem para a 3
-    INSERT INTO projetos (id, id_proposta, id_aluno, nome, descricao, data_criado) VALUES
-    (1, 1, 3, 'Site da ETEC Charles',   'Site com página inicial, cursos e contato.',      '2026-03-20 14:30:00'),
-    (2, 2, 1, 'Minha Calculadora',      'Calculadora feita com formulário e PHP.',         '2026-04-08 10:15:00'),
-    (3, 2, 4, 'Calculadora Científica', 'Além das quatro operações, tem raiz e potência.', '2026-04-09 16:45:00'),
-    (4, 3, 5, 'BiblioTech',             NULL,                                              '2026-05-02 09:00:00'),
-    (5, 4, 6, 'Braço com Servos',       'Braço com 3 servos controlados por Arduino Uno.', '2026-09-28 11:20:00');
+    -- O projeto 4 (BiblioTech) ainda é rascunho (data_enviado NULL), para testar o botão de enviar
+    INSERT INTO projetos (id, id_proposta, id_aluno, nome, descricao, data_criado, data_enviado) VALUES
+    (1, 1, 3, 'Site da ETEC Charles',   'Site com página inicial, cursos e contato.',      '2026-03-20 14:30:00', '2026-03-20 14:30:00'),
+    (2, 2, 1, 'Minha Calculadora',      'Calculadora feita com formulário e PHP.',         '2026-04-08 10:15:00', '2026-04-08 10:15:00'),
+    (3, 2, 4, 'Calculadora Científica', 'Além das quatro operações, tem raiz e potência.', '2026-04-09 16:45:00', '2026-04-09 16:45:00'),
+    (4, 3, 5, 'BiblioTech',             NULL,                                              '2026-05-02 09:00:00', NULL),
+    (5, 4, 6, 'Braço com Servos',       'Braço com 3 servos controlados por Arduino Uno.', '2026-09-28 11:20:00', '2026-09-28 11:20:00');
+
+    -- Curtidas nos projetos enviados (no feed, os mais curtidos ficam no topo)
+    -- Site da ETEC Charles (1) tem 3, Calculadora Científica (3) tem 2, os projetos 2 e 5 têm 1
+    INSERT INTO curtidas (id_user, id_projeto) VALUES
+    (1, 1), (4, 1), (5, 1),
+    (1, 3), (3, 3),
+    (3, 2),
+    (5, 5);

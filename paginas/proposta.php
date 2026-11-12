@@ -25,11 +25,11 @@
     $arquivos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if ($proposta['e_professor']) {
-        // Professor: todos os projetos enviados para a proposta
-        $sql = "SELECT pj.id, pj.nome, pj.data_criado, u.nome AS nome_aluno
+        // Professor: todos os projetos enviados para a proposta (rascunhos não aparecem)
+        $sql = "SELECT pj.id, pj.nome, pj.data_enviado, u.nome AS nome_aluno
                 FROM projetos pj
                 INNER JOIN users u ON u.id = pj.id_aluno
-                WHERE pj.id_proposta = ?
+                WHERE pj.id_proposta = ? AND pj.data_enviado IS NOT NULL
                 ORDER BY u.nome";
         $stmt = $conexao->prepare($sql);
         $stmt->execute([$proposta['id']]);
@@ -40,8 +40,8 @@
         $stmt->execute([$proposta['id_turma']]);
         $total_alunos = $stmt->fetchColumn();
     } else {
-        // Aluno: só o projeto dele, se já enviou
-        $sql = "SELECT id, nome, data_criado FROM projetos WHERE id_proposta = ? AND id_aluno = ?";
+        // Aluno: só o projeto dele, se já criou (enviado ou rascunho)
+        $sql = "SELECT id, nome, data_criado, data_enviado FROM projetos WHERE id_proposta = ? AND id_aluno = ?";
         $stmt = $conexao->prepare($sql);
         $stmt->execute([$proposta['id'], $_SESSION['id']]);
         $meu_projeto = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -95,7 +95,7 @@
                         <i class="bi bi-person"></i>
                         <span><?= htmlspecialchars($projeto['nome_aluno']) ?></span>
                         <a href="<?= $base ?>/paginas/projeto.php?id=<?= $projeto['id'] ?>"><?= htmlspecialchars($projeto['nome']) ?></a>
-                        <small>enviado em <?= date('d/m/Y H:i', strtotime($projeto['data_criado'])) ?></small>
+                        <small>enviado em <?= date('d/m/Y H:i', strtotime($projeto['data_enviado'])) ?></small>
                     </li>
                 <?php endforeach ?>
             </ul>
@@ -106,16 +106,26 @@
 
     <section class="turma-secao">
         <h3>Seu projeto</h3>
-        <?php if ($meu_projeto): ?>
+        <?php if ($meu_projeto && $meu_projeto['data_enviado']): ?>
             <p>
                 <i class="bi bi-check-circle status-enviado"></i>
                 <a href="<?= $base ?>/paginas/projeto.php?id=<?= $meu_projeto['id'] ?>"><?= htmlspecialchars($meu_projeto['nome']) ?></a>
-                <small class="turmas-vazio">criado em <?= date('d/m/Y H:i', strtotime($meu_projeto['data_criado'])) ?></small>
+                <small class="turmas-vazio">enviado em <?= date('d/m/Y H:i', strtotime($meu_projeto['data_enviado'])) ?></small>
             </p>
+        <?php elseif ($meu_projeto): ?>
+            <!-- Rascunho: o aluno criou mas ainda não enviou para o professor -->
+            <p>
+                <i class="bi bi-pencil status-pendente"></i>
+                <a href="<?= $base ?>/paginas/projeto.php?id=<?= $meu_projeto['id'] ?>"><?= htmlspecialchars($meu_projeto['nome']) ?></a>
+                <small class="turmas-vazio">rascunho, ainda não enviado</small>
+            </p>
+            <?php if ($proposta['prazo_encerrado']): ?>
+                <p class="prazo-encerrado"><i class="bi bi-lock"></i> O prazo de entrega já passou e o projeto não foi enviado.</p>
+            <?php endif ?>
         <?php elseif ($proposta['prazo_encerrado']): ?>
             <p class="prazo-encerrado"><i class="bi bi-lock"></i> O prazo de entrega já passou e você não enviou um projeto.</p>
         <?php else: ?>
-            <p class="turmas-vazio">Você ainda não enviou um projeto para esta proposta.</p>
+            <p class="turmas-vazio">Você ainda não criou um projeto para esta proposta.</p>
             <a class="botao" href="<?= $base ?>/paginas/novo_projeto.php?proposta=<?= $proposta['id'] ?>"><i class="bi bi-plus-lg"></i> Criar projeto</a>
         <?php endif ?>
     </section>

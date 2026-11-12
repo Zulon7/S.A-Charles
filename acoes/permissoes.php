@@ -45,13 +45,15 @@
         return $proposta;
     }
 
-    // Busca um projeto, mas só se o usuário é o aluno que fez ele
-    // ou professor da turma da proposta. Retorna os dados ou false.
+    // Busca um projeto, mas só se o usuário pode ver ele. Retorna os dados ou false.
+    // Rascunho: só o aluno que fez vê.
+    // Projeto enviado: é público, qualquer usuário logado pode ver (ele aparece no feed).
     // 'e_autor' diz se o usuário é o aluno do projeto.
-    // 'pode_alterar' diz se ele ainda pode editar, enviar/apagar arquivos ou apagar o projeto
-    // (só o autor, e só até o prazo de entrega da proposta).
+    // 'enviado' diz se o aluno já enviou o projeto (aí ele fica público).
+    // 'pode_alterar' diz se ele ainda pode editar, enviar/apagar arquivos, enviar/cancelar o envio
+    // ou apagar o projeto (só o autor, e só até o prazo de entrega da proposta).
     function buscar_projeto_do_usuario($conexao, $id_user, $id_projeto) {
-        $sql = "SELECT pj.id, pj.id_aluno, pj.nome, pj.descricao, pj.data_criado,
+        $sql = "SELECT pj.id, pj.id_aluno, pj.nome, pj.descricao, pj.data_criado, pj.data_enviado,
                        a.nome AS nome_aluno,
                        pr.id AS id_proposta, pr.nome AS nome_proposta, pr.id_turma, pr.data_entrega
                 FROM projetos pj
@@ -68,7 +70,10 @@
         $projeto['prazo_encerrado'] = prazo_encerrado($projeto['data_entrega']);
         $projeto['pode_alterar'] = $projeto['e_autor'] && !$projeto['prazo_encerrado'];
 
-        if (!$projeto['e_autor'] && !e_professor_da_turma($conexao, $id_user, $projeto['id_turma'])) return false;
+        $projeto['enviado'] = ($projeto['data_enviado'] !== null);
+
+        // Quem não é o autor só vê o projeto depois de enviado
+        if (!$projeto['e_autor'] && !$projeto['enviado']) return false;
 
         return $projeto;
     }

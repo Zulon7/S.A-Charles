@@ -38,8 +38,11 @@
         }
     }
 
-    // Depois os registros dos arquivos e o próprio projeto
+    // Depois os registros dos arquivos, as curtidas e o próprio projeto
     $stmt = $conexao->prepare("DELETE FROM arquivos WHERE id_projeto = ?");
+    $stmt->execute([$projeto['id']]);
+
+    $stmt = $conexao->prepare("DELETE FROM curtidas WHERE id_projeto = ?");
     $stmt->execute([$projeto['id']]);
 
     $stmt = $conexao->prepare("DELETE FROM projetos WHERE id = ?");

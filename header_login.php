@@ -1,3 +1,7 @@
+<?php
+    // A sessão precisa começar antes de qualquer HTML ser enviado
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,7 +12,5 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     <title>Gerenciador de S.A</title>
-
-    <?php session_start(); ?>
 </head>
 <body>

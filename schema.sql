@@ -18,7 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `samedia`
+-- Banco de dados: `s.a` (o mesmo nome usado em acoes/db_con_init.php)
+-- Crie antes de importar:
+--   CREATE DATABASE `s.a` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+-- Ao importar o seed.sql pela linha de comando, use --default-character-set=utf8mb4
 --
 
 -- --------------------------------------------------------
@@ -31,6 +34,7 @@ DROP TABLE IF EXISTS `turmas`;
 DROP TABLE IF EXISTS `propostas`;
 DROP TABLE IF EXISTS `projetos`;
 DROP TABLE IF EXISTS `arquivos`;
+DROP TABLE IF EXISTS `curtidas`;
 
 
 --
@@ -67,6 +71,9 @@ CREATE TABLE `propostas` (
 -- Estrutura para tabela `projetos`
 -- Projeto que um aluno (id_aluno) envia para uma proposta (id_proposta)
 -- Cada aluno só pode ter um projeto por proposta (UNIQUE)
+-- O projeto começa como rascunho (data_enviado NULL) e só o aluno vê.
+-- Quando o aluno clica em "Enviar projeto" (data_enviado preenchida),
+-- o projeto fica público: aparece no feed para todos os usuários
 --
 
 CREATE TABLE `projetos` (
@@ -76,6 +83,7 @@ CREATE TABLE `projetos` (
   `nome` varchar(150) NOT NULL,
   `descricao` text,
   `data_criado` datetime NOT NULL DEFAULT current_timestamp(),
+  `data_enviado` datetime DEFAULT NULL,
   UNIQUE (`id_proposta`, `id_aluno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -98,6 +106,22 @@ CREATE TABLE `arquivos` (
   `nome_salvo` varchar(64) NOT NULL UNIQUE,
   `tamanho` int(11) NOT NULL,
   `data_envio` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `curtidas`
+-- Um usuário (id_user) curtiu um projeto (id_projeto).
+-- A chave primária com as duas colunas impede curtir o mesmo projeto duas vezes.
+-- No feed, os projetos com mais curtidas aparecem primeiro
+--
+
+CREATE TABLE `curtidas` (
+  `id_user` int(11) NOT NULL,
+  `id_projeto` int(11) NOT NULL,
+  `data_criado` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id_user`, `id_projeto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

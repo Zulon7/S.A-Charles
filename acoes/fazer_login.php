@@ -1,15 +1,16 @@
 <?php
 
     // Verifica se houve POST e se o usuário ou a senha é(são) vazio(s)
-    if (!isset($_POST)) {
-        header('Location:../index.php'); exit;
+    // ($_POST sempre existe, então isset($_POST) nunca barrava nada)
+    if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+        header('Location:../login.php'); exit;
     }
 
     require_once("db_con_init.php");
     session_start();
 
-    $nome = $_POST["nome"];
-    $senha = $_POST["senha"];
+    $nome = trim($_POST["nome"] ?? '');
+    $senha = $_POST["senha"] ?? '';
 
     // Validação do usuário/senha digitados
     $sql = "SELECT `id`, `nome`, `nivel`, `senha` FROM `users` WHERE ((`nome` = ?) OR (`email`) = ?)  AND (`ativo` = 1) LIMIT 1";
@@ -28,7 +29,7 @@
         // Salva os dados encontados na variável $fileira
         $_SESSION['id'] = $fileira['id'];
         $_SESSION['nivel'] = $fileira['nivel'];
-        header("Location:../paginas/turmas.php");
+        header("Location:../paginas/turmas.php"); exit;
     }
 
 

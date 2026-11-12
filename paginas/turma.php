@@ -45,15 +45,16 @@
     $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Propostas da turma (sem data de entrega ficam no final)
-    // total_projetos e id_meu_projeto são usados no card (ver proposta_card.php)
+    // total_projetos, id_meu_projeto e meu_projeto_enviado são usados no card (ver proposta_card.php)
     $sql = "SELECT pr.id, pr.nome, pr.descricao, pr.data_entrega,
-                   (SELECT COUNT(*) FROM projetos pj WHERE pj.id_proposta = pr.id) AS total_projetos,
-                   (SELECT pj.id FROM projetos pj WHERE pj.id_proposta = pr.id AND pj.id_aluno = ?) AS id_meu_projeto
+                   (SELECT COUNT(*) FROM projetos pj WHERE pj.id_proposta = pr.id AND pj.data_enviado IS NOT NULL) AS total_projetos,
+                   (SELECT pj.id FROM projetos pj WHERE pj.id_proposta = pr.id AND pj.id_aluno = ?) AS id_meu_projeto,
+                   (SELECT pj.data_enviado FROM projetos pj WHERE pj.id_proposta = pr.id AND pj.id_aluno = ?) AS meu_projeto_enviado
             FROM propostas pr
             WHERE pr.id_turma = ?
             ORDER BY pr.data_entrega IS NULL, pr.data_entrega";
     $stmt = $conexao->prepare($sql);
-    $stmt->execute([$_SESSION['id'], $turma['id']]);
+    $stmt->execute([$_SESSION['id'], $_SESSION['id'], $turma['id']]);
     $propostas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Só professores da turma podem criar propostas

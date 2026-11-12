@@ -30,7 +30,7 @@
                 <a href="<?= $base ?>/paginas/turmas.php">Turmas</a>
                 <a href="<?= $base ?>/paginas/propostas.php">Propostas</a>
                 <a href="<?= $base ?>/paginas/projetos.php">Projetos</a>
-                <a href="<?= $base ?>/feed.php">Feed</a>
+                <a href="<?= $base ?>/paginas/feed.php">Feed</a>
                 <a href="<?= $base ?>/paginas/conta.php">Conta</a>
                 <a href="<?= $base ?>/acoes/fazer_logout.php">Sair</a>
             </aside>

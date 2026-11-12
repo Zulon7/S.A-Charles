@@ -4,19 +4,21 @@
     require_once(__DIR__ . '/../acoes/db_con_init.php');
 
     // Busca as propostas de todas as turmas que o usuário participa ou administra.
-    // total_projetos: quantos projetos a proposta recebeu (para o professor)
-    // id_meu_projeto: o projeto que o usuário enviou, se enviou (para o aluno)
+    // total_projetos: quantos projetos enviados a proposta recebeu (para o professor)
+    // id_meu_projeto: o projeto que o usuário criou, se criou (para o aluno)
+    // meu_projeto_enviado: data em que ele enviou esse projeto (NULL se ainda é rascunho)
     // Propostas sem data de entrega ficam no final da lista
     $sql = "SELECT pr.id, pr.nome, pr.descricao, pr.data_entrega, t.nome AS nome_turma,
-                   (SELECT COUNT(*) FROM projetos pj WHERE pj.id_proposta = pr.id) AS total_projetos,
-                   (SELECT pj.id FROM projetos pj WHERE pj.id_proposta = pr.id AND pj.id_aluno = ?) AS id_meu_projeto
+                   (SELECT COUNT(*) FROM projetos pj WHERE pj.id_proposta = pr.id AND pj.data_enviado IS NOT NULL) AS total_projetos,
+                   (SELECT pj.id FROM projetos pj WHERE pj.id_proposta = pr.id AND pj.id_aluno = ?) AS id_meu_projeto,
+                   (SELECT pj.data_enviado FROM projetos pj WHERE pj.id_proposta = pr.id AND pj.id_aluno = ?) AS meu_projeto_enviado
             FROM propostas pr
             INNER JOIN turmas t ON t.id = pr.id_turma
             WHERE t.id IN (SELECT id_turma FROM user_participa WHERE id_user = ?)
                OR t.id IN (SELECT id_turma FROM user_modera   WHERE id_user = ?)
             ORDER BY pr.data_entrega IS NULL, pr.data_entrega";
     $stmt = $conexao->prepare($sql);
-    $stmt->execute([$_SESSION['id'], $_SESSION['id'], $_SESSION['id']]);
+    $stmt->execute([$_SESSION['id'], $_SESSION['id'], $_SESSION['id'], $_SESSION['id']]);
     $propostas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 

@@ -6,7 +6,7 @@
     <?php if (isset($_SESSION["erro"])): ?>
         <div class = "login-aviso" >
             <span><?php echo $_SESSION["erro"]?></span>
-            <button onclick = "close('login-aviso');">
+            <button onclick = "close_element('login-aviso');">
                 <i class="bi bi-x"></i>
             </button>
         </div>
@@ -15,7 +15,7 @@
 
     <form action="acoes/fazer_cadastro.php" method = "POST" class = "login-form">
         <div class = 'field'>
-            <label for="nome">Email</label>
+            <label for="email">Email</label>
             <input type="text" id = "email" name = "email">
         </div>
 
@@ -25,8 +25,8 @@
         </div>
         
         <div class = 'field'>
-            <label for="nome">Senha</label>
-            <input type="text" id = "senha" name = "senha">
+            <label for="senha">Senha</label>
+            <input type="password" id = "senha" name = "senha">
         </div>
 
         <input class = "submit" type="submit" value="Cadastrar">

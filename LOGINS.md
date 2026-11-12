@@ -27,6 +27,7 @@ Site: http://localhost:8080/Vitor%20Aires%20Diogenes/S.A-Charles/login.php
 ## Bons para testar
 
 - **CaraLegal**: tem um projeto com prazo encerrado (Minha Calculadora) e propostas ainda abertas para criar projeto.
+- **CarlaMendes**: tem um projeto ainda em rascunho (BiblioTech), para testar o botão "Enviar projeto".
 - **CaraRuim**: professor; vê os projetos dos alunos e pode criar propostas na Turma do Charles.
 - **FernandaCosta**: administra a turma Robótica, que não tem alunos nem propostas.
 - **EduardaAlves**: não está em nenhuma turma, então mostra as páginas vazias.

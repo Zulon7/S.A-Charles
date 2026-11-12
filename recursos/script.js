@@ -1,10 +1,11 @@
 function close_element(target) {
     if(typeof(target) != 'string') return;
-    elements = document.getElementsByClassName(target);
-    
-    for (i = 0; i < elements.length; i++) {
-        elements[i].remove();
+    // Array.from copia a lista: getElementsByClassName é "viva" e encolhe
+    // a cada remove(), o que fazia o for pular elementos
+    const elements = Array.from(document.getElementsByClassName(target));
 
+    for (const element of elements) {
+        element.remove();
     }
 }
 

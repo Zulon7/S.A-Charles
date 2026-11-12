@@ -1,17 +1,27 @@
 <?php
-    if (!isset($_POST)) {
-        header('Location:../index.php'); exit;
+    if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+        header('Location:../cadastro.php'); exit;
     }
 
     require_once("db_con_init.php");
     session_start();
 
 
-    $nome = $_POST["nome"];
-    $email = $_POST["email"];
-    $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
+    $nome = trim($_POST["nome"] ?? '');
+    $email = trim($_POST["email"] ?? '');
+    $senha_digitada = $_POST["senha"] ?? '';
 
-    $sql = "SELECT `id`, `nome`, `email` FROM `users` WHERE ((`nome` = ?) OR (`email` = ?))  AND (`ativo` = 1) LIMIT 1";
+    // Nome e senha não podem ficar vazios (o nome cabe em 150 caracteres no banco)
+    if ($nome == '' || $senha_digitada == '' || mb_strlen($nome) > 150 || mb_strlen($email) > 150) {
+        $_SESSION['erro'] = "Preencha nome, email e senha";
+        header("Location:../cadastro.php"); exit;
+    }
+
+    $senha = password_hash($senha_digitada, PASSWORD_DEFAULT);
+
+    // Procura também entre os inativos: nome e email são UNIQUE no banco,
+    // então repetir o de um usuário inativo daria erro no INSERT
+    $sql = "SELECT `id`, `nome`, `email` FROM `users` WHERE (`nome` = ?) OR (`email` = ?) LIMIT 1";
     $stmt = $conexao -> prepare($sql);
     $stmt -> execute([$nome, $email]);
 
@@ -23,8 +33,8 @@
 
     if (empty($resultado) and filter_var($email, FILTER_VALIDATE_EMAIL)){
         $sql = "
-        INSERT INTO users (id, nome, email, senha, data_criado)
-        VALUES (default, ?, ?, ?, default)
+        INSERT INTO users (id, nome, email, senha, data_criado, nivel)
+        VALUES (default, ?, ?, ?, default, 'aluno')
         ";
         $stmt = $conexao -> prepare($sql);
         $stmt -> execute([$nome, $email, $senha]);

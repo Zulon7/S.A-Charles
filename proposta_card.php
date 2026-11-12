@@ -2,7 +2,8 @@
     /**
      * Card de uma proposta. Usado em paginas/propostas.php e paginas/turma.php
      * O card inteiro é um link para a página da proposta.
-     * @var array $proposta precisa ter: id, nome, descricao, data_entrega, total_projetos, id_meu_projeto
+     * @var array $proposta precisa ter: id, nome, descricao, data_entrega, total_projetos,
+     *                      id_meu_projeto, meu_projeto_enviado
      *                      e opcionalmente nome_turma (para mostrar a turma)
      * @var string $base vem do header.php
      */
@@ -26,8 +27,10 @@
     <!-- Professor vê quantos projetos recebeu, aluno vê se já enviou o dele -->
     <?php if ($_SESSION['nivel'] == 'professor'): ?>
         <p><i class="bi bi-inbox"></i> <?= $proposta['total_projetos'] ?> projeto(s) recebido(s)</p>
-    <?php elseif ($proposta['id_meu_projeto']): ?>
+    <?php elseif ($proposta['meu_projeto_enviado']): ?>
         <p class="status-enviado"><i class="bi bi-check-circle"></i> Projeto enviado</p>
+    <?php elseif ($proposta['id_meu_projeto']): ?>
+        <p class="status-pendente"><i class="bi bi-pencil"></i> Rascunho (não enviado)</p>
     <?php else: ?>
         <p class="status-pendente"><i class="bi bi-clock"></i> Pendente</p>
     <?php endif ?>

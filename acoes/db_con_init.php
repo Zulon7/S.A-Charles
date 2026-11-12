@@ -10,7 +10,8 @@ $password = "";
 $dbname = "s.a";
 
 try {
-$conexao = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+// charset=utf8mb4 garante que os acentos cheguem certos do banco
+$conexao = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);
 
 $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

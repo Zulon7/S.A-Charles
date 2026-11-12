@@ -3,10 +3,11 @@
 <?php
     require_once(__DIR__ . '/../acoes/db_con_init.php');
 
-    // Aluno: os projetos que ele criou
+    // Aluno: os projetos que ele criou (enviados ou rascunhos)
     // Professor: os projetos enviados para propostas das turmas que ele administra
+    // (rascunhos não aparecem para o professor)
     // (a mesma consulta serve para os dois, com o OR)
-    $sql = "SELECT pj.id, pj.nome, pj.descricao, pj.data_criado,
+    $sql = "SELECT pj.id, pj.nome, pj.descricao, pj.data_criado, pj.data_enviado,
                    pr.nome AS nome_proposta, t.nome AS nome_turma, u.nome AS nome_aluno,
                    (SELECT COUNT(*) FROM arquivos a WHERE a.id_projeto = pj.id) AS total_arquivos
             FROM projetos pj
@@ -14,7 +15,8 @@
             INNER JOIN turmas t ON t.id = pr.id_turma
             INNER JOIN users u ON u.id = pj.id_aluno
             WHERE pj.id_aluno = ?
-               OR pr.id_turma IN (SELECT id_turma FROM user_modera WHERE id_user = ?)
+               OR (pj.data_enviado IS NOT NULL
+                   AND pr.id_turma IN (SELECT id_turma FROM user_modera WHERE id_user = ?))
             ORDER BY pj.data_criado DESC";
     $stmt = $conexao->prepare($sql);
     $stmt->execute([$_SESSION['id'], $_SESSION['id']]);

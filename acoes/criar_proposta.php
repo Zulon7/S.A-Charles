@@ -29,7 +29,10 @@
     }
 
     // A data é opcional, mas se vier precisa ser válida (formato AAAA-MM-DD do <input type="date">)
-    if ($data_entrega != '' && !DateTime::createFromFormat('Y-m-d', $data_entrega)) {
+    // Comparar com format() recusa datas que não existem, como 2026-02-31
+    // (o createFromFormat sozinho aceitaria e viraria 03/03)
+    $data = DateTime::createFromFormat('Y-m-d', $data_entrega);
+    if ($data_entrega != '' && (!$data || $data->format('Y-m-d') != $data_entrega)) {
         $_SESSION['erro'] = 'Data de entrega inválida.';
         header($voltar); exit;
     }

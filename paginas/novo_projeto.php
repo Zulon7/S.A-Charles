@@ -50,7 +50,7 @@
         <textarea id="descricao" name="descricao" rows="5"></textarea>
 
         <button type="submit"><i class="bi bi-plus-lg"></i> Criar projeto</button>
-        <small>Depois de criar, você envia os arquivos na página do projeto.</small>
+        <small>O projeto é criado como rascunho. Na página do projeto você anexa os arquivos e envia. Depois de enviado, ele fica público no feed.</small>
     </form>
 <?php endif ?>
 
