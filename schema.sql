@@ -21,9 +21,6 @@ SET time_zone = "+00:00";
 -- Banco de dados: `sa` (o mesmo nome usado em acoes/db_con_init.php)
 -- Crie antes de importar:
 --   CREATE DATABASE `sa` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
--- E o usuário que o site usa para conectar (sem senha, só com acesso ao banco sa):
---   CREATE USER 'admin'@'localhost' IDENTIFIED BY '';
---   GRANT ALL PRIVILEGES ON `sa`.* TO 'admin'@'localhost';
 -- Ao importar o seed.sql pela linha de comando, use --default-character-set=utf8mb4
 --
 
