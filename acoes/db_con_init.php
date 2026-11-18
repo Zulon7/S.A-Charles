@@ -4,8 +4,8 @@
 // (importante para saber se o prazo de entrega já passou)
 date_default_timezone_set('America/Sao_Paulo');
 
-$servername = "localhost";
-$username = "root";
+$servername = "127.0.0.1";
+$username = "sauser";
 $password = "";
 $dbname = "sa";
 
