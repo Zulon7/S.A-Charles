@@ -7,7 +7,7 @@ date_default_timezone_set('America/Sao_Paulo');
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "s.a";
+$dbname = "sa";
 
 try {
 // charset=utf8mb4 garante que os acentos cheguem certos do banco

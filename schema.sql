@@ -18,9 +18,9 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `s.a` (o mesmo nome usado em acoes/db_con_init.php)
+-- Banco de dados: `sa` (o mesmo nome usado em acoes/db_con_init.php)
 -- Crie antes de importar:
---   CREATE DATABASE `s.a` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+--   CREATE DATABASE `sa` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 -- Ao importar o seed.sql pela linha de comando, use --default-character-set=utf8mb4
 --
 
